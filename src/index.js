@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./index.css";
 
 class App extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class App extends React.Component {
             todo: [...todo, value],
             value: "",
         });
-        localStorage.setItem("todo", JSON.stringify([...todo].push(value)));
+        localStorage.setItem("todo", JSON.stringify(todo.concat(value)));
         document.querySelector("form").reset();
     }
 
@@ -43,9 +44,10 @@ class App extends React.Component {
         let list = this.state.todo.map((item, index) => (
             <li key={index}>
                 {item}
-                <button onClick={() => this.removeItem(index)}>
-                    Remove {index}
-                </button>
+                <div className="btns">
+                    <button onClick={() => this.removeItem(index)}>❌</button>
+                    <button>✔️</button>
+                </div>
             </li>
         ));
 
