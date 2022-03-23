@@ -72,13 +72,5 @@ li button {
     padding: 0;
     width: 20px;
     height: 20px;
-    border: 1px solid rgb(118, 118, 118);
-}
-
-li button:nth-child(2) {
-    border-left: none;
-    border-radius: 0 3px 3px 0;
-}
-li button:nth-child(1) {
-    border-radius: 3px 0 0 3px;
+    border: 1px solid 3px rgb(118, 118, 118);
 }

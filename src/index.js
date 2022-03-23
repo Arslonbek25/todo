@@ -45,8 +45,7 @@ class App extends React.Component {
             <li key={index}>
                 {item}
                 <div className="btns">
-                    <button onClick={() => this.removeItem(index)}>❌</button>
-                    <button>✔️</button>
+                    <button onClick={() => this.removeItem(index)}>✔️</button>
                 </div>
             </li>
         ));
