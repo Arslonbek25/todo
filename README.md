@@ -1,2 +1,3 @@
-# A todo app
+# a To-Do app
+
 https://thissitenameisalreadytaken.netlify.app/

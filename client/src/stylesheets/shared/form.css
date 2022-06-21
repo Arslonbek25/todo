@@ -1,0 +1,21 @@
+.add-todo-form {
+	margin-bottom: 30px;
+	display: flex;
+	width: 100%;
+}
+
+.add-todo-form input[type="text"] {
+	border: none;
+	border-bottom: 1px solid #777;
+	/* margin-right: 10px; */
+	padding: 5px 10px;
+	border-radius: 5px 0 0 5px;
+	width: inherit;
+}
+
+.add-todo-form button {
+	background: #fff;
+	padding: 5px 10px;
+	border: 1px solid #777;
+	border-radius: 0 5px 5px 0;
+}

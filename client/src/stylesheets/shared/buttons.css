@@ -1,0 +1,41 @@
+:root {
+	--color-checkbox-border: rgb(210, 210, 220);
+}
+
+.btn {
+	height: 24px;
+	width: 24px;
+}
+
+.btn-checkbox {
+	margin-right: 16px;
+	border-radius: 50%;
+	border: 2px solid var(--color-checkbox-border);
+	background: none;
+	transition: ease-in 0.05s all;
+}
+
+.btn-checked {
+	background: var(--color-checkbox-border);
+}
+
+.btn-delete {
+	position: absolute;
+	top: 50%;
+	right: 16px;
+	transform: translateY(-50%);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border: none;
+	border-radius: 50%;
+	padding: 0;
+	background: #af1e2d;
+}
+
+.btn-delete img {
+	height: 15px;
+	width: 15px;
+}

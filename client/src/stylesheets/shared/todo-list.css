@@ -1,0 +1,28 @@
+.todos {
+	width: 100%;
+}
+
+.todo {
+	position: relative;
+	display: flex;
+	align-items: center;
+	border-radius: 5px;
+	height: 40px;
+	padding: 5px;
+	background: var(--color-background-dark);
+	color: var(--color-text-light);
+	list-style: none;
+	padding-left: 16px;
+}
+
+.todo:not(:last-child) {
+	margin-bottom: 10px;
+}
+
+li button {
+	border: 1px solid rgb(118, 118, 118);
+	border-radius: 3px;
+	padding: 0;
+	height: 20px;
+	width: 20px;
+}
