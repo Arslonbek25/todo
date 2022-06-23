@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_BASE = "https://taskschedulerr.herokuapp.com/";
+const API_BASE = "http://localhost:3000/" ?? "https://taskschedulerr.herokuapp.com/";
 
 function App() {
 	const [todos, setTodos] = useState([]);
@@ -13,7 +13,7 @@ function App() {
 	const getTodos = () => {
 		fetch(`${API_BASE}todos`)
 			.then(res => res.json())
-			.then(data => setTodos(data.reverse()))
+			.then(data => setTodos(sortByDate(data)))
 			.catch(err => console.error("Error:", err));
 	};
 
@@ -36,11 +36,9 @@ function App() {
 		const data = await fetch(`${API_BASE}todo/complete/${id}`, { method: "PUT" }).then(res => res.json());
 
 		if (data)
-			setTodos(todos =>
+			setTodos(
 				todos.map(todo => {
-					if (todo._id === data._id) {
-						todo.complete = data.complete;
-					}
+					if (todo._id === data._id) todo.complete = data.complete;
 					return todo;
 				})
 			);
@@ -52,6 +50,32 @@ function App() {
 		if (data) setTodos(todos => todos.filter(todo => todo._id !== data._id));
 	};
 
+	const sortByDate = todos => todos.sort((a, b) => b.timestamp - a.timestamp);
+	const sortByCompletion = todos => todos.sort((a, b) => b.complete - a.complete);
+	const sortByIncompletion = todos => todos.sort((a, b) => a.complete - b.complete);
+
+	const sort = async e => {
+		const sortBy = e.target.options[e.target.selectedIndex].value;
+		let sortedTodos;
+
+		switch (sortBy) {
+			case "dateAdded":
+				sortedTodos = sortByDate(todos);
+				break;
+			case "completed":
+				sortedTodos = sortByCompletion(todos);
+				break;
+			case "uncompleted":
+				sortedTodos = sortByIncompletion(todos);
+				break;
+			default:
+				sortedTodos = todos;
+				break;
+		}
+
+		setTodos([...sortedTodos]);
+	};
+
 	return (
 		<div className="container">
 			<form className="form-add" onSubmit={e => addTodo(e)}>
@@ -60,6 +84,14 @@ function App() {
 					<span>To do</span>
 				</label>
 			</form>
+			<div className="options">
+				<select className="sort-by" onChange={e => sort(e)}>
+					<option value="dateAdded">Date added</option>
+					<option value="completed">Completed tasks</option>
+					<option value="uncompleted">Uncompleted tasks</option>
+					{/* <option value="importance">Importance</option> */}
+				</select>
+			</div>
 			<div className="todos">
 				{todos.map(todo => (
 					<div className="todo" key={todo._id}>
