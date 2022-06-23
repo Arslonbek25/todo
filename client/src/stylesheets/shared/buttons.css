@@ -1,22 +1,53 @@
 :root {
-	--color-checkbox-border: rgb(210, 210, 220);
+	--color-checkbox-active-border: hsl(var(--color-base-hue), 10%, 85%);
+	--button-transition: 0.05s all ease-out;
 }
 
 .btn {
+	outline: none;
 	height: 24px;
 	width: 24px;
+	transition: var(--button-transition);
 }
 
 .btn-checkbox {
-	margin-right: 16px;
+	position: relative;
+	border: 2px solid var(--color-background-light);
 	border-radius: 50%;
-	border: 2px solid var(--color-checkbox-border);
+	margin-right: 16px;
 	background: none;
-	transition: ease-in 0.05s all;
+}
+
+.btn-checkbox:active:not(.btn-checked) {
+	border-color: var(--color-checkbox-active-border);
+}
+
+.btn-checkbox:active {
+	transform: scale(0.9);
+}
+
+.btn-checkbox::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.8, 0.8);
+	background: url("/public/tick.png") no-repeat;
+	visibility: hidden;
+	background-position: center;
+	background-size: 16px 16px;
+	height: 24px;
+	width: 24px;
+	transition: var(--button-transition);
 }
 
 .btn-checked {
-	background: var(--color-checkbox-border);
+	background: var(--color-background-light);
+}
+
+.btn-checked::before {
+	transform: translate(-50%, -50%) scale(1);
+	visibility: visible;
 }
 
 .btn-delete {
@@ -25,17 +56,12 @@
 	right: 16px;
 	transform: translateY(-50%);
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
 	border: none;
-	border-radius: 50%;
 	padding: 0;
-	background: #af1e2d;
+	background: url("/public/trash.svg") no-repeat;
+	background-size: 24px 24px;
 }
 
-.btn-delete img {
-	height: 15px;
-	width: 15px;
+.btn-delete:active {
+	transform: translateY(-50%) scale(0.9);
 }

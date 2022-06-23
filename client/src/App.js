@@ -25,12 +25,11 @@ function App() {
 			headers: {
 				"Content-Type": "application/json",
 			},
-
 			body: JSON.stringify({ text: inputValue }),
 		}).then(res => res.json());
 
 		setInputValue("");
-		setTodos([...todos, data]);
+		setTodos([data, ...todos]);
 	};
 
 	const completeTodo = async id => {
@@ -71,7 +70,7 @@ function App() {
 							onClick={() => completeTodo(todo._id)}></button>
 						{todo.text}
 						<button className="btn btn-delete" onClick={() => removeTodo(todo._id)}>
-							<img src="close.png" alt="" />
+							{/* <img src="close.png" alt="" /> */}
 						</button>
 					</div>
 				))}
