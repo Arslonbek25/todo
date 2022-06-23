@@ -18,4 +18,4 @@ mongoose
 	.then(console.log("Connected to DB"))
 	.catch(console.error);
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://taskschedulerr.herokuapp.com/";
 
 function App() {
 	const [todos, setTodos] = useState([]);
@@ -11,16 +11,16 @@ function App() {
 	}, []);
 
 	const getTodos = () => {
-		fetch(`${API_BASE}/todos`)
+		fetch(`${API_BASE}todos`)
 			.then(res => res.json())
-			.then(data => setTodos(data))
+			.then(data => setTodos(data.reverse()))
 			.catch(err => console.error("Error:", err));
 	};
 
 	const addTodo = async e => {
 		e.preventDefault();
 		if (!inputValue) return;
-		const data = await fetch(`${API_BASE}/todo/new/`, {
+		const data = await fetch(`${API_BASE}todo/new/`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -33,7 +33,7 @@ function App() {
 	};
 
 	const completeTodo = async id => {
-		const data = await fetch(`${API_BASE}/todo/complete/${id}`, { method: "PUT" }).then(res => res.json());
+		const data = await fetch(`${API_BASE}todo/complete/${id}`, { method: "PUT" }).then(res => res.json());
 
 		if (data)
 			setTodos(todos =>
@@ -47,7 +47,7 @@ function App() {
 	};
 
 	const removeTodo = async id => {
-		const data = await fetch(`${API_BASE}/todo/delete/${id}`, { method: "DELETE" }).then(res => res.json());
+		const data = await fetch(`${API_BASE}todo/delete/${id}`, { method: "DELETE" }).then(res => res.json());
 
 		if (data) setTodos(todos => todos.filter(todo => todo._id !== data._id));
 	};
