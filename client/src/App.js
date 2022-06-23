@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-const API_BASE = "http://localhost:3000/" ?? "https://taskschedulerr.herokuapp.com/";
+const API_BASE = "http://localhost:3000/";
+console.log(process.env.REACT_APP_API_BASE);
 
 function App() {
 	const [todos, setTodos] = useState([]);
