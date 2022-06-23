@@ -8,15 +8,17 @@ router.post("/new", (req, res) => {
 });
 
 router.put("/complete/:id", async (req, res) => {
-	const todo = await Todo.findById(req.params.id);
-
-	todo.complete = !todo.complete;
-	todo.save();
+	let todo;
+	try {
+		todo = await Todo.findById(req.params.id);
+		todo.complete = !todo.complete;
+		todo.save();
+	} catch {}
 	res.json(todo);
 });
 
 router.delete("/delete/:id", async (req, res) => {
-	const result = await Todo.findByIdAndDelete(req.params.id);
+	let result = await Todo.findByIdAndDelete(req.params.id);
 
 	res.json(result);
 });

@@ -1,6 +1,6 @@
 :root {
 	--color-checkbox-active-border: hsl(var(--color-base-hue), 10%, 85%);
-	--button-transition: 0.05s all ease-out;
+	--button-transition: 0.05s all ease;
 }
 
 .btn {
