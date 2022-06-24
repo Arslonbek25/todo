@@ -13,7 +13,7 @@ function App() {
 	const getTodos = () => {
 		fetch(`${API_BASE}todos`)
 			.then(res => res.json())
-			.then(data => setTodos(sortByDate(data)))
+			.then(data => setTodos(sort(localStorage.getItem("sortBy"), data)))
 			.catch(err => console.error("Error:", err));
 	};
 
@@ -52,22 +52,22 @@ function App() {
 	};
 
 	const sortByDate = todos => todos.sort((a, b) => b.timestamp - a.timestamp);
-	const sortByCompletion = todos => todos.sort((a, b) => b.complete - a.complete);
-	const sortByIncompletion = todos => todos.sort((a, b) => a.complete - b.complete);
+	const sortByCompleted = todos => todos.sort((a, b) => b.complete - a.complete);
+	const sortByUncompleted = todos => todos.sort((a, b) => a.complete - b.complete);
 
-	const sort = async e => {
-		const sortBy = e.target.options[e.target.selectedIndex].value;
+	const sort = (sortBy, todos) => {
+		localStorage.setItem("sortBy", sortBy);
 		let sortedTodos;
 
 		switch (sortBy) {
-			case "dateAdded":
+			case "date":
 				sortedTodos = sortByDate(todos);
 				break;
 			case "completed":
-				sortedTodos = sortByCompletion(todos);
+				sortedTodos = sortByCompleted(todos);
 				break;
 			case "uncompleted":
-				sortedTodos = sortByIncompletion(todos);
+				sortedTodos = sortByUncompleted(todos);
 				break;
 			default:
 				sortedTodos = todos;
@@ -75,6 +75,7 @@ function App() {
 		}
 
 		setTodos([...sortedTodos]);
+		return [...sortedTodos];
 	};
 
 	return (
@@ -92,8 +93,11 @@ function App() {
 				</label>
 			</div>
 			<div className="options">
-				<select className="sort-by" onChange={e => sort(e)}>
-					<option value="dateAdded">Date added</option>
+				<select
+					className="sort-by"
+					onChange={e => sort(e.target.options[e.target.selectedIndex].value, todos)}
+					value={localStorage.getItem("sortBy")}>
+					<option value="date">Date added</option>
 					<option value="completed">Completed tasks</option>
 					<option value="uncompleted">Uncompleted tasks</option>
 					{/* <option value="importance">Importance</option> */}
