@@ -53,8 +53,8 @@
 
 .form-add input:focus + label span,
 .form-add input:valid + label span {
-	transform: translateY(-150%);
-	font-size: 0.8rem;
+	transform: translateY(-140%);
+	font-size: 0.7rem;
 	color: var(--color-form-blue);
 }
 

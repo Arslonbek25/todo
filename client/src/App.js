@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_BASE = "http://localhost:3000/";
-console.log(process.env.REACT_APP_API_BASE);
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 function App() {
 	const [todos, setTodos] = useState([]);
@@ -19,7 +18,8 @@ function App() {
 	};
 
 	const addTodo = async e => {
-		e.preventDefault();
+		if (e.keyCode !== 13) return;
+
 		if (!inputValue) return;
 		const data = await fetch(`${API_BASE}todo/new/`, {
 			method: "POST",
@@ -79,12 +79,18 @@ function App() {
 
 	return (
 		<div className="container">
-			<form className="form-add" onSubmit={e => addTodo(e)}>
-				<input type="text" onChange={e => setInputValue(e.target.value)} value={inputValue} required />
+			<div className="form-add">
+				<input
+					type="text"
+					onChange={e => setInputValue(e.target.value)}
+					onKeyUp={e => addTodo(e)}
+					value={inputValue}
+					required
+				/>
 				<label htmlFor="name">
 					<span>To do</span>
 				</label>
-			</form>
+			</div>
 			<div className="options">
 				<select className="sort-by" onChange={e => sort(e)}>
 					<option value="dateAdded">Date added</option>
