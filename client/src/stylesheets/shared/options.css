@@ -1,7 +1,5 @@
 .options {
 	width: 100%;
-	margin-bottom: 0.5rem;
-}
-
-.options .sort-by {
+	margin-bottom: 0.7rem;
+	text-align: right;
 }

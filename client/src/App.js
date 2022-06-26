@@ -94,7 +94,6 @@ function App() {
 			</div>
 			<div className="options">
 				<select
-					className="sort-by"
 					onChange={e => sort(e.target.options[e.target.selectedIndex].value, todos)}
 					value={localStorage.getItem("sortBy")}>
 					<option value="date">Date added</option>
